@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FlavorFast – Food Ordering</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="app">
+      <!-- Auth Section -->
+      <section id="auth-screen" class="screen active">
+        <header class="brand-header">
+          <div class="logo-circle">FF</div>
+          <div class="brand-text">
+            <h1>FlavorFast</h1>
+            <p>Fresh. Fast. Delivered with love.</p>
+          </div>
+        </header>
+
+        <div class="auth-card glass">
+          <div class="auth-toggle">
+            <button class="auth-tab active" data-target="signin-form">
+              Sign In
+            </button>
+            <button class="auth-tab" data-target="signup-form">
+              Sign Up
+            </button>
+          </div>
+
+          <form id="signin-form" class="auth-form active">
+            <div class="field">
+              <label>Email</label>
+              <input type="email" id="signin-email" required />
+            </div>
+            <div class="field">
+              <label>Password</label>
+              <input type="password" id="signin-password" required />
+            </div>
+            <button type="submit" class="btn primary full">Continue</button>
+          </form>
+
+          <form id="signup-form" class="auth-form">
+            <div class="field-group">
+              <div class="field">
+                <label>First Name</label>
+                <input type="text" id="signup-first-name" required />
+              </div>
+              <div class="field">
+                <label>Last Name</label>
+                <input type="text" id="signup-last-name" required />
+              </div>
+            </div>
+            <div class="field">
+              <label>Email</label>
+              <input type="email" id="signup-email" required />
+            </div>
+            <div class="field">
+              <label>Phone</label>
+              <input type="tel" id="signup-phone" required />
+            </div>
+            <div class="field">
+              <label>Password</label>
+              <input type="password" id="signup-password" required />
+            </div>
+            <div class="field">
+              <label>Confirm Password</label>
+              <input type="password" id="signup-password-confirm" required />
+            </div>
+            <button type="submit" class="btn primary full">
+              Create Account
+            </button>
+          </form>
+        </div>
+      </section>
+
+      <!-- Main App Section -->
+      <section id="main-screen" class="screen">
+        <nav class="top-nav">
+          <div class="brand-mini">
+            <div class="logo-circle small">FF</div>
+            <span>FlavorFast</span>
+          </div>
+          <div class="nav-actions">
+            <button id="user-info-btn" class="chip">
+              <span id="nav-user-name">Guest</span>
+            </button>
+            <button id="signout-btn" class="chip subtle">Sign Out</button>
+            <button id="cart-toggle" class="cart-pill">
+              <span class="icon">🛒</span>
+              <span>Cart</span>
+              <span id="cart-count" class="badge">0</span>
+            </button>
+          </div>
+        </nav>
+
+        <div class="section-tabs">
+          <button class="section-tab active" data-section="catalog">
+            Order
+          </button>
+          <button class="section-tab" data-section="track">
+            Track Parcel
+          </button>
+          <button class="section-tab" data-section="admin">
+            Admin
+          </button>
+        </div>
+
+        <section id="catalog-section" class="main-section active">
+          <header class="hero">
+            <div class="hero-text">
+              <h2>Order food in a few taps.</h2>
+              <p>
+                Browse curated dishes from top kitchens around you. No calls, no
+                queues – just delicious food delivered fast.
+              </p>
+              <div class="hero-search">
+                <input
+                  type="text"
+                  id="search-input"
+                  placeholder="Search for pizza, burger, sushi..."
+                />
+                <button id="search-btn" class="btn primary">Search</button>
+              </div>
+              <div class="tags-row">
+                <button class="tag active" data-category="all">All</button>
+                <button class="tag" data-category="pizza">Pizza</button>
+                <button class="tag" data-category="burger">Burgers</button>
+                <button class="tag" data-category="sushi">Sushi</button>
+                <button class="tag" data-category="dessert">Desserts</button>
+              </div>
+            </div>
+            <div class="hero-image">
+              <div class="hero-badge glass">
+                <span class="hero-badge-icon">⭐</span>
+                <div>
+                  <p class="hero-badge-title">Top Rated</p>
+                  <p class="hero-badge-sub">4.8 average rating</p>
+                </div>
+              </div>
+              <img
+                src="https://images.unsplash.com/photo-1604908176997-1251884b08a3?auto=format&fit=crop&w=900&q=80"
+                alt="Delicious food"
+              />
+            </div>
+          </header>
+
+          <main class="layout">
+            <section class="food-grid" id="food-list">
+              <!-- Cards inserted by JS -->
+            </section>
+
+            <aside class="cart-panel glass" id="cart-panel">
+              <h3>Your Order</h3>
+              <div id="cart-items" class="cart-items">
+                <p class="cart-empty">
+                  Your cart is empty. Add something tasty!
+                </p>
+              </div>
+              <div class="cart-summary">
+                <div class="row">
+                  <span>Subtotal</span>
+                  <span id="cart-subtotal">$0.00</span>
+                </div>
+                <div class="row">
+                  <span>Delivery</span>
+                  <span id="cart-delivery">$2.50</span>
+                </div>
+                <div class="row total">
+                  <span>Total</span>
+                  <span id="cart-total">$2.50</span>
+                </div>
+              </div>
+              <button id="checkout-btn" class="btn primary full" disabled>
+                Proceed to Checkout
+              </button>
+            </aside>
+          </main>
+        </section>
+
+        <section id="track-section" class="main-section">
+          <div class="glass track-card">
+            <h2>Track your parcel</h2>
+            <p class="track-subtitle">
+              See the latest status of your most recent order.
+            </p>
+
+            <div id="track-empty" class="track-empty">
+              <p>You don't have any active orders yet.</p>
+            </div>
+
+            <div id="track-content" class="track-content hidden">
+              <div class="track-header">
+                <div>
+                  <p class="track-label">Order ID</p>
+                  <p id="track-order-id" class="track-value"></p>
+                </div>
+                <div>
+                  <p class="track-label">Total</p>
+                  <p id="track-order-total" class="track-value"></p>
+                </div>
+              </div>
+
+              <ul id="track-status-list" class="track-status-list"></ul>
+
+              <p class="track-current">
+                Current status:
+                <span id="track-current-status"></span>
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section id="admin-section" class="main-section">
+          <div class="glass admin-card">
+            <div class="admin-header">
+              <h2>Admin Panel</h2>
+              <span class="admin-badge">Demo only</span>
+            </div>
+            <p class="admin-subtitle">
+              Manage menu items and update parcel status. Protected with a
+              simple demo password.
+            </p>
+
+            <div class="admin-login-row" id="admin-lock-row">
+              <input
+                type="password"
+                id="admin-password"
+                placeholder="Enter admin password (hint: admin123)"
+              />
+              <button id="admin-unlock-btn" class="btn primary">
+                Unlock
+              </button>
+            </div>
+
+            <div id="admin-content" class="admin-content">
+              <p class="admin-locked-text" id="admin-locked-message">
+                Admin controls are locked. Enter the password above to
+                continue.
+              </p>
+
+              <div id="admin-panels" class="hidden">
+                <div class="admin-section-block">
+                  <h3>Menu management</h3>
+                  <form id="admin-add-food-form" class="admin-form">
+                    <div class="field-group">
+                      <div class="field">
+                        <label>Food name</label>
+                        <input
+                          type="text"
+                          id="admin-food-name"
+                          placeholder="e.g. BBQ Chicken Pizza"
+                          required
+                        />
+                      </div>
+                      <div class="field">
+                        <label>Category</label>
+                        <select id="admin-food-category" required>
+                          <option value="pizza">Pizza</option>
+                          <option value="burger">Burger</option>
+                          <option value="sushi">Sushi</option>
+                          <option value="dessert">Dessert</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="field-group">
+                      <div class="field">
+                        <label>Price ($)</label>
+                        <input
+                          type="number"
+                          id="admin-food-price"
+                          step="0.01"
+                          min="0"
+                          required
+                        />
+                      </div>
+                      <div class="field">
+                        <label>Prep time</label>
+                        <input
+                          type="text"
+                          id="admin-food-time"
+                          placeholder="e.g. 20–25 min"
+                        />
+                      </div>
+                    </div>
+                    <div class="field">
+                      <label>Image URL (optional)</label>
+                      <input
+                        type="url"
+                        id="admin-food-image"
+                        placeholder="Paste an image link"
+                      />
+                    </div>
+                    <div class="field">
+                      <label>Tag (optional)</label>
+                      <input
+                        type="text"
+                        id="admin-food-tag"
+                        placeholder="e.g. New, Hot, Seasonal"
+                      />
+                    </div>
+                    <button type="submit" class="btn primary full">
+                      Add / Post Food
+                    </button>
+                  </form>
+
+                  <div class="admin-food-list" id="admin-food-list"></div>
+                </div>
+
+                <div class="admin-section-block">
+                  <h3>Parcel tracking</h3>
+                  <div
+                    id="admin-tracking-empty"
+                    class="admin-tracking-empty"
+                  >
+                    No order to update yet. Once a customer places an order,
+                    you can adjust its status here.
+                  </div>
+                  <div
+                    id="admin-tracking-form"
+                    class="admin-tracking-form hidden"
+                  >
+                    <p class="admin-tracking-label">
+                      Updating order
+                      <span id="admin-order-id"></span>
+                    </p>
+                    <select id="admin-status-select"></select>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <!-- Checkout Modal -->
+      <div id="checkout-modal" class="modal">
+        <div class="modal-backdrop"></div>
+        <div class="modal-content glass">
+          <header class="modal-header">
+            <h3>Complete Your Order</h3>
+            <button id="modal-close" class="icon-btn">&times;</button>
+          </header>
+
+          <div class="modal-body">
+            <div class="field">
+              <label>Delivery Address</label>
+              <textarea
+                id="delivery-address"
+                rows="3"
+                placeholder="Street, house number, city, postal code"
+                required
+              ></textarea>
+            </div>
+
+            <div class="field-group">
+              <div class="field">
+                <label>City</label>
+                <input type="text" id="delivery-city" required />
+              </div>
+              <div class="field">
+                <label>Postal Code</label>
+                <input type="text" id="delivery-zip" required />
+              </div>
+            </div>
+
+            <div class="field">
+              <label>Payment Method</label>
+              <select id="payment-method">
+                <option value="card">Credit / Debit Card</option>
+                <option value="cod">Cash on Delivery</option>
+              </select>
+            </div>
+
+            <div id="card-details">
+              <div class="field">
+                <label>Card Number</label>
+                <input
+                  type="text"
+                  id="card-number"
+                  maxlength="19"
+                  placeholder="1234 5678 9012 3456"
+                />
+              </div>
+              <div class="field-group">
+                <div class="field">
+                  <label>Expiry</label>
+                  <input
+                    type="text"
+                    id="card-expiry"
+                    maxlength="5"
+                    placeholder="MM/YY"
+                  />
+                </div>
+                <div class="field">
+                  <label>CVC</label>
+                  <input
+                    type="password"
+                    id="card-cvc"
+                    maxlength="4"
+                    placeholder="***"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div class="order-summary-inline">
+              <span>Order Total</span>
+              <span id="checkout-total">$0.00</span>
+            </div>
+          </div>
+
+          <footer class="modal-footer">
+            <button id="confirm-order-btn" class="btn primary full">
+              Place Order
+            </button>
+          </footer>
+        </div>
+      </div>
+
+      <!-- Toast -->
+      <div id="toast" class="toast"></div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
+
